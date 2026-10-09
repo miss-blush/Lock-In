@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark-academia">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lock In - Study Sanctuary</title>
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Lock In">
+    <meta name="application-name" content="Lock In">
+    <meta name="theme-color" content="#0A0908">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 1. DARK ACADEMIA */
+        [data-theme="dark-academia"] {
+            --bg-img: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1200&auto=format&fit=crop');
+            --card-bg: rgba(18, 14, 12, 0.85);
+            --text: #F5ECE5;
+            --subtext: #C4B0A2;
+            --accent: #C8955A;
+            --accent-soft: rgba(200, 149, 90, 0.25);
+            --accent-text: #FFFFFF;
+            --border: rgba(245, 236, 229, 0.14);
+            --bg-color: #0A0908;
+        }
+
+        /* 2. RAINY LIBRARY */
+        [data-theme="rainy-library"] {
+            --bg-img: url('https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=1200&auto=format&fit=crop');
+            --card-bg: rgba(12, 18, 16, 0.86);
+            --text: #EAF2EF;
+            --subtext: #9FB2AB;
+            --accent: #4A8B82;
+            --accent-soft: rgba(74, 139, 130, 0.25);
+            --accent-text: #FFFFFF;
+            --border: rgba(234, 242, 239, 0.14);
+            --bg-color: #080F0E;
+        }
+
+        /* 3. GOLDEN SUNFLOWER */
+        [data-theme="golden-sunflower"] {
+            --bg-img: url('https://images.unsplash.com/photo-1597848212624-a19eb35e2651?q=80&w=1200&auto=format&fit=crop');
+            --card-bg: rgba(22, 16, 8, 0.85);
+            --text: #FFF8EE;
+            --subtext: #D6C2A5;
+            --accent: #D99B26;
+            --accent-soft: rgba(217, 155, 38, 0.28);
+            --accent-text: #171103;
+            --border: rgba(255, 248, 238, 0.15);
+            --bg-color: #0D0904;
+        }
+
+        /* 4. ENCHANTED FOREST */
+        [data-theme="enchanted-forest"] {
+            --bg-img: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop');
+            --card-bg: rgba(10, 18, 14, 0.88);
+            --text: #E8F5F0;
+            --subtext: #98B8AC;
+            --accent: #3E8E6C;
+            --accent-soft: rgba(62, 142, 108, 0.28);
+            --accent-text: #FFFFFF;
+            --border: rgba(232, 245, 240, 0.15);
+            --bg-color: #060D09;
+        }
+
+        /* 5. TWILIGHT STREETLAMP */
+        [data-theme="twilight-streetlamp"] {
+            --bg-img: url('https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=1200&auto=format&fit=crop');
+            --card-bg: rgba(15, 14, 22, 0.86);
+            --text: #F1EFF7;
+            --subtext: #B4AEC6;
+            --accent: #8A72D6;
+            --accent-soft: rgba(138, 114, 214, 0.28);
+            --accent-text: #FFFFFF;
+            --border: rgba(241, 239, 247, 0.14);
+            --bg-color: #090810;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: var(--bg-img);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: var(--bg-color);
+            color: var(--text);
+            transition: background-image 0.5s ease, background-color 0.4s ease, color 0.4s ease;
+        }
+
+        body.no-wallpaper {
+            background-image: none !important;
+        }
+
+        .font-serif-aesthetic { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        .glass-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+        }
+
+        .glass-btn {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .glass-btn:active { 
+            transform: scale(0.96); 
+        }
+
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: var(--border);
+            stroke-width: 2.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            stroke: var(--accent);
+            transition: stroke-dasharray 0.3s ease;
+        }
+
+        .hidden { 
+            display: none !important; 
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-3 sm:p-6 antialiased selection:bg-stone-800">
+
+    <div class="max-w-md w-full mx-auto space-y-3.5 pb-12">
+        
+        <!-- HEADER -->
+        <header class="glass-card p-3.5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-black/60 flex items-center justify-center border border-[var(--border)] shadow-inner">
+                    <svg class="w-5 h-5 text-amber-300" viewBox="0 0 100 100" fill="currentColor">
+                        <polygon points="25,42 48,50 28,58"/>
+                        <polygon points="75,42 52,50 72,58"/>
+                        <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" stroke-width="4"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-serif-aesthetic font-bold text-base tracking-wider">Lock In</h1>
+                    <p class="text-[10px] opacity-70" style="color: var(--subtext);">Deep Focus Sanctuary</p>
+                </div>
+            </div>
+
+            <!-- THEME SELECTOR -->
+            <select id="theme-selector" onchange="applyTheme(this.value)" class="glass-btn text-[11px] px-2.5 py-1.5 bg-black/40 outline-none cursor-pointer">
+                <option value="dark-academia" class="bg-stone-900 text-stone-100">Dark Academia</option>
+                <option value="rainy-library" class="bg-stone-900 text-stone-100">Rainy Library</option>
+                <option value="golden-sunflower" class="bg-stone-900 text-stone-100">Golden Sunflowers</option>
+                <option value="enchanted-forest" class="bg-stone-900 text-stone-100">Enchanted Forest</option>
+                <option value="twilight-streetlamp" class="bg-stone-900 text-stone-100">Twilight Streetlamp</option>
+            </select>
+        </header>
+
+        <!-- SCHOLAR GREETING BADGE -->
+        <div id="scholar-badge" class="glass-card px-4 py-2 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-1.5">
+                <span class="opacity-60 text-[10px]" style="color: var(--subtext);">Scholar:</span>
+                <span id="badge-name" class="font-bold">Julian</span>
+            </div>
+            <span id="badge-goal" class="font-semibold text-[11px]" style="color: var(--accent);">NEET 2027 / Class 12</span>
+        </div>
+
+        <!-- NAVIGATION TABS -->
+        <nav class="grid grid-cols-4 gap-1.5 glass-card p-1.5">
+            <button onclick="navigateTab('timer')" id="btn-timer" class="glass-btn py-2 text-[11px] transition-all" style="background-color: var(--accent); color: var(--accent-text);">Focus</button>
+            <button onclick="navigateTab('calendar')" id="btn-calendar" class="glass-btn py-2 text-[11px] transition-all opacity-70">Habits</button>
+            <button onclick="navigateTab('checklist')" id="btn-checklist" class="glass-btn py-2 text-[11px] transition-all opacity-70">Tasks</button>
+            <button onclick="navigateTab('profile')" id="btn-profile" class="glass-btn py-2 text-[11px] transition-all opacity-70">Analytics</button>
+        </nav>
+
+        <!-- TAB 1: FOCUS TIMER -->
+        <div id="tab-timer" class="space-y-4">
+            <div class="glass-card p-6 text-center space-y-6">
+                <!-- Modes -->
+                <div class="flex justify-center gap-2">
+                    <button onclick="setTimerMode('focus')" id="mode-focus" class="glass-btn px-3.5 py-1.5 text-xs" style="background-color: var(--accent-soft);">Focus</button>
+                    <button onclick="setTimerMode('short')" id="mode-short" class="glass-btn px-3.5 py-1.5 text-xs opacity-60">Short Break</button>
+                    <button onclick="setTimerMode('long')" id="mode-long" class="glass-btn px-3.5 py-1.5 text-xs opacity-60">Long Break</button>
+                </div>
+
+                <!-- Circular Visual & Big Display -->
+                <div class="relative py-2 flex flex-col items-center justify-center">
+                    <svg viewBox="0 0 36 36" class="circular-chart w-48 h-48">
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path id="timer-progress-arc" class="circle" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                        <div id="timer-display" class="text-5xl font-serif-aesthetic font-bold tracking-tight">25:00</div>
+                        <span id="session-status-badge" class="text-[10px] mt-1 font-semibold tracking-wide uppercase opacity-70" style="color: var(--subtext);">Ready</span>
+                    </div>
+                </div>
+
+                <p id="quote-display" class="text-xs italic" style="color: var(--subtext);">"Eliminate distractions. Lock in."</p>
+
+                <!-- Controls -->
+                <div class="flex justify-center items-center gap-2">
+                    <button onclick="adjustTime(-300)" class="glass-btn px-3 py-2 text-xs opacity-75">-5m</button>
+                    <button onclick="toggleTimer()" id="play-btn" class="glass-btn px-6 py-2.5 text-xs font-bold shadow-lg" style="background-color: var(--accent); color: var(--accent-text);">Begin Session</button>
+                    <button onclick="adjustTime(300)" class="glass-btn px-3 py-2 text-xs opacity-75">+5m</button>
+                    <button onclick="resetTimer()" class="glass-btn px-3 py-2 text-xs opacity-60" title="Reset">↺</button>
+                </div>
+            </div>
+
+            <!-- Target Intent / Brain Dump -->
+            <div class="glass-card p-4 space-y-3">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-serif-aesthetic text-xs font-semibold">Session Target Intent</h3>
+                    <span class="text-[10px] opacity-60">Mindful Focus</span>
+                </div>
+                <textarea id="brain-dump" rows="2" placeholder="Write down your exact goal for this study session..." class="w-full p-3 rounded-xl border border-[var(--border)] text-xs bg-black/20 outline-none resize-none"></textarea>
+                <button onclick="saveBrainDump()" id="btn-lock-intent" class="glass-btn w-full py-2 text-xs" style="background-color: var(--accent-soft);">Lock In Target</button>
+            </div>
+        </div>
+
+        <!-- TAB 2: HABITS GRID -->
+        <div id="tab-calendar" class="hidden glass-card p-5 space-y-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="font-serif-aesthetic text-base font-bold">30-Day Habit Grid</h3>
+                    <p class="text-[10px] opacity-60">Consistency Sanctuary Tracker</p>
+                </div>
+                <button onclick="resetHabitGrid()" class="text-[10px] px-2.5 py-1 rounded-lg border border-[var(--border)] opacity-60 hover:opacity-100">Reset</button>
+            </div>
+
+            <!-- Habit stats -->
+            <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="p-2 rounded-xl border border-[var(--border)] bg-black/20">
+                    <span class="text-[9px] opacity-60 block">Completed</span>
+                    <span id="habit-stat-completed" class="font-bold text-xs" style="color: var(--accent);">0/30</span>
+                </div>
+                <div class="p-2 rounded-xl border border-[var(--border)] bg-black/20">
+                    <span class="text-[9px] opacity-60 block">Consistency</span>
+                    <span id="habit-stat-rate" class="font-bold text-xs" style="color: var(--accent);">0%</span>
+                </div>
+                <div class="p-2 rounded-xl border border-[var(--border)] bg-black/20">
+                    <span class="text-[9px] opacity-60 block">Streak</span>
+                    <span id="habit-stat-streak" class="font-bold text-xs" style="color: var(--accent);">0d 🔥</span>
+                </div>
+            </div>
+
+            <div id="habit-grid" class="grid grid-cols-6 gap-2"></div>
+            <p class="text-[10px] opacity-60 leading-relaxed">Tap a day tile to mark study session finished. Build your unbroken sacred chain.</p>
+        </div>
+
+        <!-- TAB 3: ACADEMIC TASKS -->
+        <div id="tab-checklist" class="hidden glass-card p-5 space-y-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="font-serif-aesthetic text-base font-bold">Academic Tasks</h3>
+                    <p class="text-[10px] opacity-60">Curriculum & Syllabus Checklist</p>
+                </div>
+                <span id="task-ratio-badge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-lg border border-[var(--border)] bg-black/20" style="color: var(--accent);">0/0 Done</span>
+            </div>
+
+            <!-- Task input -->
+            <div class="flex gap-2">
+                <input type="text" id="task-input" placeholder="New target or topic to cover..." onkeydown="if(event.key==='Enter') addTask()" class="flex-1 p-2.5 rounded-xl border border-[var(--border)] text-xs bg-black/20 outline-none">
+                <button onclick="addTask()" class="glass-btn px-4 text-xs font-bold" style="background-color: var(--accent); color: var(--accent-text);">Add</button>
+            </div>
+
+            <div id="task-list" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
+        </div>
+
+        <!-- TAB 4: ANALYTICS & PROFILE -->
+        <div id="tab-profile" class="hidden space-y-4">
+            
+            <!-- Weekly Chart -->
+            <div class="glass-card p-5 space-y-3">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-serif-aesthetic text-sm font-bold">Weekly Productive Hours</h3>
+                    <span id="weekly-total-label" class="text-[11px] font-bold" style="color: var(--accent);">0.0 hrs total</span>
+                </div>
+
+                <div class="h-28 flex items-end justify-between gap-2 pt-4 px-1 border-b border-[var(--border)]">
+                    <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+                        <span id="lbl-mon" class="text-[8px] font-bold opacity-75"></span>
+                        <div id="bar-mon" class="w-full rounded-t-lg transition-all duration-500" style="height: 10%; background-color: var(--accent);"></div>
+                        <span class="text-[9px] opacity-60">M</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+                        <span id="lbl-tue" class="text-[8px] font-bold opacity-75"></span>
+                        <div id="bar-tue" class="w-full rounded-t-lg transition-all duration-500" style="height: 10%; background-color: var(--accent);"></div>
+                        <span class="text-[9px] opacity-60">T</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+                        <span id="lbl-wed" class="text-[8px] font-bold opacity-75"></span>
+                        <div id="bar-wed" class="w-full rounded-t-lg transition-all duration-500" style="height: 10%; background-color: var(--accent);"></div>
+                        <span class="text-[9px] opacity-60">W</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+                        <span id="lbl-thu" class="text-[8px] font-bold opacity-75"></span>
+                        <div id="bar-thu" class="w-full rounded-t-lg transition-all duration-500" style="height: 10%; background-color: var(--accent);"></div>
+                        <span class="text-[9px] opacity-60">T</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+                        <span id="lbl-fri" class="text-[8px] font-bold opacity-75"></span>
+                        <div id="bar-fri" class="w-full rounded-t-lg transition-all duration-500" style="height: 10%; background-color: var(--accent);"></div>
+                        <span class="text-[9px] opacity-60">F</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+                        <span id="lbl-sat" class="text-[8px] font-bold opacity-75"></span>
+                        <div id="bar-sat" class="w-full rounded-t-lg transition-all duration-500" style="height: 10%; background-color: var(--accent);"></div>
+                        <span class="text-[9px] opacity-60">S</span>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+                        <span id="lbl-sun" class="text-[8px] font-bold opacity-75"></span>
+                        <div id="bar-sun" class="w-full rounded-t-lg transition-all duration-500" style="height: 10%; background-color: var(--accent);"></div>
+                        <span class="text-[9px] opacity-60">S</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Performance Tracker -->
+            <div class="glass-card p-5 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-serif-aesthetic text-sm font-bold">Daily Performance Tracker</h3>
+                    <input type="date" id="tracker-date-picker" onchange="loadDateData(this.value)" class="glass-btn px-2 py-1 text-[11px] bg-black/40 outline-none">
+                </div>
+
+                <div class="grid grid-cols-3 gap-2 text-center">
+                    <div class="p-2 rounded-xl border border-[var(--border)] bg-black/20">
+                        <span class="text-[9px] opacity-60 block">Study Hours</span>
+                        <div class="flex items-center justify-center gap-1 mt-0.5">
+                            <button onclick="adjustPerfHours(-0.5)" class="text-[10px] px-1 opacity-70 hover:opacity-100">-</button>
+                            <input type="number" id="perf-hours" step="0.5" min="0" value="0" onchange="saveDateData()" class="w-12 text-center font-bold text-xs bg-transparent outline-none">
+                            <button onclick="adjustPerfHours(0.5)" class="text-[10px] px-1 opacity-70 hover:opacity-100">+</button>
+                        </div>
+                    </div>
+                    <div class="p-2 rounded-xl border border-[var(--border)] bg-black/20">
+                        <span class="text-[9px] opacity-60 block">Productivity</span>
+                        <select id="perf-prod" onchange="saveDateData()" class="w-full text-center font-bold text-[11px] bg-transparent outline-none mt-0.5 cursor-pointer">
+                            <option value="100%" class="bg-stone-900 text-white">100% 🔥</option>
+                            <option value="75%" class="bg-stone-900 text-white">75% ⚡</option>
+                            <option value="50%" class="bg-stone-900 text-white">50% 🟡</option>
+                            <option value="25%" class="bg-stone-900 text-white">25% 🌧️</option>
+                        </select>
+                    </div>
+                    <div class="p-2 rounded-xl border border-[var(--border)] bg-black/20">
+                        <span class="text-[9px] opacity-60 block">Task Ratio</span>
+                        <span id="perf-tasks-stat" class="font-bold text-xs mt-1 block">0/0</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-[10px] opacity-70 mb-1.5 block font-semibold">Mindset & Mood State</label>
+                    <div class="grid grid-cols-4 gap-1.5 text-[11px]">
+                        <button onclick="setMood('Locked In')" id="mood-Locked-In" class="glass-btn py-1.5 opacity-60">🎯 Locked In</button>
+                        <button onclick="setMood('Flow')" id="mood-Flow" class="glass-btn py-1.5 opacity-60">🌊 Flow</button>
+                        <button onclick="setMood('Calm')" id="mood-Calm" class="glass-btn py-1.5 opacity-60">☕ Calm</button>
+                        <button onclick="setMood('Fatigued')" id="mood-Fatigued" class="glass-btn py-1.5 opacity-60">🔋 Tired</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-[10px] opacity-70 mb-1 block font-semibold">Daily Summary & Reflections</label>
+                    <textarea id="perf-thoughts" rows="3" placeholder="What did you achieve today? Write your daily journal..." onchange="saveDateData()" class="w-full p-3 rounded-xl border border-[var(--border)] text-xs bg-black/20 outline-none resize-none"></textarea>
+                </div>
+            </div>
+
+            <!-- Preferences ("Preferences Alag Se") -->
+            <div class="glass-card p-5 space-y-3">
+                <h3 class="font-serif-aesthetic text-sm font-bold">Personal Preferences & Setup</h3>
+                
+                <div class="space-y-2.5">
+                    <div>
+                        <label class="text-[10px] opacity-70 block mb-0.5">Scholar Name</label>
+                        <input type="text" id="pref-name" placeholder="Your Name" oninput="savePreferences()" class="w-full p-2.5 rounded-xl border border-[var(--border)] text-xs bg-black/20 outline-none">
+                    </div>
+                    <div>
+                        <label class="text-[10px] opacity-70 block mb-0.5">Target Academic Goal</label>
+                        <input type="text" id="pref-goal" placeholder="e.g. NEET 2027 / Class 12 Boards" oninput="savePreferences()" class="w-full p-2.5 rounded-xl border border-[var(--border)] text-xs bg-black/20 outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div>
+                            <label class="text-[10px] opacity-70 block mb-0.5">Daily Goal (Hours)</label>
+                            <input type="number" id="pref-daily-hours" value="6" oninput="savePreferences()" class="w-full p-2.5 rounded-xl border border-[var(--border)] text-xs bg-black/20 outline-none">
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-0.5">
+                                <label class="text-[10px] opacity-70">Chime Alert</label>
+                                <button onclick="playChimeSound()" class="text-[9px] text-amber-400 hover:underline">Test</button>
+                            </div>
+                            <select id="pref-sound" onchange="savePreferences()" class="w-full p-2.5 rounded-xl border border-[var(--border)] text-xs bg-black/20 outline-none cursor-pointer">
+                                <option value="enabled" class="bg-stone-900 text-white">Enabled</option>
+                                <option value="disabled" class="bg-stone-900 text-white">Muted</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-1">
+                        <div>
+                            <label class="text-xs font-semibold block">Aesthetic Wallpaper Art</label>
+                            <span class="text-[10px] opacity-60">Atmospheric background photos</span>
+                        </div>
+                        <input type="checkbox" id="pref-wallpaper" checked onchange="toggleWallpaper(this.checked)" class="w-4 h-4 cursor-pointer accent-amber-500">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Tab Navigation
+        function navigateTab(tabKey) {
+            ['timer', 'calendar', 'checklist', 'profile'].forEach(k => {
+                document.getElementById('tab-' + k).classList.add('hidden');
+                const btn = document.getElementById('btn-' + k);
+                if (btn) {
+                    btn.style.backgroundColor = 'transparent';
+                    btn.classList.add('opacity-70');
+                }
+            });
+            document.getElementById('tab-' + tabKey).classList.remove('hidden');
+            const activeBtn = document.getElementById('btn-' + tabKey);
+            if (activeBtn) {
+                activeBtn.style.backgroundColor = 'var(--accent)';
+                activeBtn.style.color = 'var(--accent-text)';
+                activeBtn.classList.remove('opacity-70');
+            }
+            if (tabKey === 'profile') {
+                renderWeeklyBarGraph();
+            }
+        }
+
+        // Theme Switcher & Background Sync
+        function applyTheme(themeKey) {
+            document.documentElement.setAttribute('data-theme', themeKey);
+            localStorage.setItem('lockin_theme', themeKey);
+            const activeBtn = document.querySelector('nav button:not(.opacity-70)');
+            if (activeBtn) {
+                activeBtn.style.backgroundColor = 'var(--accent)';
+                activeBtn.style.color = 'var(--accent-text)';
+            }
+        }
+        const savedTheme = localStorage.getItem('lockin_theme') || 'dark-academia';
+        applyTheme(savedTheme);
+        document.getElementById('theme-selector').value = savedTheme;
+
+        function toggleWallpaper(enable) {
+            document.body.classList.toggle('no-wallpaper', !enable);
+            localStorage.setItem('lockin_wallpaper', enable ? 'true' : 'false');
+        }
+        const savedWallpaper = localStorage.getItem('lockin_wallpaper') !== 'false';
+        document.getElementById('pref-wallpaper').checked = savedWallpaper;
+        toggleWallpaper(savedWallpaper);
+
+        // Web Audio Synthesizer (Pure 528Hz Focus Chime)
+        function playChimeSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const now = ctx.currentTime;
+                
+                // Fundamental 528Hz & Harmonics
+                [528, 1056, 1584].forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now);
+                    
+                    const amp = (0.5 / (idx + 1));
+                    gain.gain.setValueAtTime(amp, now);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.5);
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 2.5);
+                });
+            } catch (e) {
+                console.log('Audio not allowed yet:', e);
+            }
+        }
+
+        // Timer Logic
+        let timerSeconds = 25 * 60;
+        let totalSessionSeconds = 25 * 60;
+        let timerInterval = null;
+        let isTimerRunning = false;
+        let activeMode = 'focus';
+
+        const SANCTUARY_QUOTES = [
+            "\"Eliminate distractions. Lock in.\"",
+            "\"Deep work is not an option; it is the craft.\"",
+            "\"In stillness, mastery is forged.\"",
+            "\"The library belongs to those who stay.\"",
+            "\"Feed your focus, starve your distractions.\"",
+            "\"Silence the noise; summon the scholar within.\""
+        ];
+
+        function updateTimerDisplay() {
+            const m = Math.floor(timerSeconds / 60);
+            const s = timerSeconds % 60;
+            document.getElementById('timer-display').innerText = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+
+            // Arc Progress
+            const progress = totalSessionSeconds > 0 ? (1 - (timerSeconds / totalSessionSeconds)) * 100 : 0;
+            document.getElementById('timer-progress-arc').setAttribute('stroke-dasharray', `${progress.toFixed(1)}, 100`);
+        }
+
+        function setTimerMode(mode) {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            activeMode = mode;
+            document.getElementById('play-btn').innerText = "Begin Session";
+            document.getElementById('session-status-badge').innerText = "Ready";
+
+            ['focus', 'short', 'long'].forEach(m => {
+                const b = document.getElementById('mode-' + m);
+                b.style.backgroundColor = 'transparent';
+                b.classList.add('opacity-60');
+            });
+            const activeBtn = document.getElementById('mode-' + mode);
+            activeBtn.style.backgroundColor = 'var(--accent-soft)';
+            activeBtn.classList.remove('opacity-60');
+
+            if (mode === 'focus') timerSeconds = 25 * 60;
+            if (mode === 'short') timerSeconds = 5 * 60;
+            if (mode === 'long') timerSeconds = 15 * 60;
+            totalSessionSeconds = timerSeconds;
+            updateTimerDisplay();
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('play-btn');
+            const badge = document.getElementById('session-status-badge');
+
+            if (isTimerRunning) {
+                clearInterval(timerInterval);
+                isTimerRunning = false;
+                btn.innerText = "Resume";
+                badge.innerText = "Paused";
+            } else {
+                isTimerRunning = true;
+                btn.innerText = "Pause";
+                badge.innerText = "In Deep Session";
+
+                // Cycle quote
+                const qIdx = Math.floor(Math.random() * SANCTUARY_QUOTES.length);
+                document.getElementById('quote-display').innerText = SANCTUARY_QUOTES[qIdx];
+
+                timerInterval = setInterval(() => {
+                    if (timerSeconds > 0) {
+                        timerSeconds--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        isTimerRunning = false;
+                        btn.innerText = "Begin Session";
+                        badge.innerText = "Finished";
+
+                        if (document.getElementById('pref-sound').value === 'enabled') {
+                            playChimeSound();
+                        }
+
+                        const sessionMins = Math.round(totalSessionSeconds / 60);
+                        if (activeMode === 'focus') {
+                            logCompletedSession(sessionMins);
+                        }
+                        alert(`Session Complete! Great focus session of ${sessionMins} mins logged to your daily study hours.`);
+                        resetTimer();
+                    }
+                }, 1000);
+            }
+        }
+
+        function adjustTime(amt) { 
+            timerSeconds = Math.max(60, timerSeconds + amt); 
+            totalSessionSeconds = Math.max(60, totalSessionSeconds + amt); 
+            updateTimerDisplay(); 
+        }
+
+        function resetTimer() { 
+            clearInterval(timerInterval); 
+            isTimerRunning = false; 
+            if (activeMode === 'focus') timerSeconds = 25 * 60;
+            if (activeMode === 'short') timerSeconds = 5 * 60;
+            if (activeMode === 'long') timerSeconds = 15 * 60;
+            totalSessionSeconds = timerSeconds;
+            document.getElementById('play-btn').innerText = "Begin Session"; 
+            document.getElementById('session-status-badge').innerText = "Ready";
+            updateTimerDisplay(); 
+        }
+
+        function saveBrainDump() { 
+            const val = document.getElementById('brain-dump').value;
+            localStorage.setItem('lockin_braindump', val); 
+            const btn = document.getElementById('btn-lock-intent');
+            btn.innerText = "✓ Intent Locked In";
+            setTimeout(() => { btn.innerText = "Lock In Target"; }, 2000);
+        }
+        document.getElementById('brain-dump').value = localStorage.getItem('lockin_braindump') || '';
+
+        // Habit Grid
+        let habits = JSON.parse(localStorage.getItem('lockin_habits')) || [true, true, true, false, true, true, false, true, true, true, ...Array(20).fill(false)];
+        function renderHabits() {
+            const grid = document.getElementById('habit-grid');
+            grid.innerHTML = '';
+            let streak = 0;
+            let completed = 0;
+
+            habits.forEach((c, i) => {
+                if (c) completed++;
+                if (c && streak === i) streak++;
+
+                const btn = document.createElement('button');
+                btn.className = `h-10 rounded-xl text-xs border border-[var(--border)] transition-all ${c ? 'font-bold shadow' : 'opacity-40'}`;
+                if (c) { 
+                    btn.style.backgroundColor = 'var(--accent)'; 
+                    btn.style.color = 'var(--accent-text)'; 
+                }
+                btn.innerText = i + 1;
+                btn.onclick = () => { habits[i] = !habits[i]; renderHabits(); };
+                grid.appendChild(btn);
+            });
+
+            document.getElementById('habit-stat-completed').innerText = `${completed}/30`;
+            document.getElementById('habit-stat-rate').innerText = `${Math.round((completed / 30) * 100)}%`;
+            document.getElementById('habit-stat-streak').innerText = `${streak}d 🔥`;
+
+            localStorage.setItem('lockin_habits', JSON.stringify(habits));
+        }
+
+        function resetHabitGrid() {
+            if (confirm("Reset all 30 days for a fresh streak cycle?")) {
+                habits = Array(30).fill(false);
+                renderHabits();
+            }
+        }
+
+        // Academic Tasks
+        let tasks = JSON.parse(localStorage.getItem('lockin_tasks')) || [
+            { text: "Review Organic Reaction Mechanisms (Aldehydes & Ketones)", done: true },
+            { text: "Complete 50 Practice Problems on Thermodynamics", done: true },
+            { text: "Active Recall flashcards for Human Physiology", done: false },
+            { text: "Mock Exam Error Log Analysis", done: false },
+            { text: "Formulate formula cheat sheet for Optics & Wave Motion", done: false }
+        ];
+
+        function renderTasks() {
+            const list = document.getElementById('task-list');
+            list.innerHTML = '';
+            tasks.forEach((t, i) => {
+                const item = document.createElement('div');
+                item.className = "p-2.5 rounded-xl border border-[var(--border)] flex justify-between items-center text-xs bg-black/25";
+                item.innerHTML = `
+                    <span class="${t.done ? 'line-through opacity-50' : 'font-medium'} flex-1 pr-2">${t.text}</span>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="toggleTask(${i})" class="px-2.5 py-1 rounded-lg border border-[var(--border)] text-[10px] font-semibold ${t.done ? 'bg-[var(--accent)] text-[var(--accent-text)]' : 'opacity-70'}">${t.done ? '✓ Done' : 'Pending'}</button>
+                        <button onclick="deleteTask(${i})" class="px-1.5 py-1 text-stone-400 hover:text-red-400 text-xs">✕</button>
+                    </div>`;
+                list.appendChild(item);
+            });
+            localStorage.setItem('lockin_tasks', JSON.stringify(tasks));
+            updateTaskStat();
+        }
+
+        function addTask() {
+            const inp = document.getElementById('task-input');
+            if (inp.value.trim()) { 
+                tasks.unshift({ text: inp.value.trim(), done: false }); 
+                inp.value = ''; 
+                renderTasks(); 
+            }
+        }
+        function toggleTask(i) { tasks[i].done = !tasks[i].done; renderTasks(); }
+        function deleteTask(i) { tasks.splice(i, 1); renderTasks(); }
+
+        function updateTaskStat() {
+            const done = tasks.filter(t => t.done).length;
+            const text = `${done}/${tasks.length}`;
+            const badge = document.getElementById('task-ratio-badge');
+            if (badge) badge.innerText = `${text} Done`;
+            const perf = document.getElementById('perf-tasks-stat');
+            if (perf) perf.innerText = text;
+        }
+
+        // Daily Performance & Journaling
+        let dailyPerformance = JSON.parse(localStorage.getItem('lockin_daily_perf')) || {};
+        let currentSelectedDate = new Date().toISOString().split('T')[0];
+        document.getElementById('tracker-date-picker').value = currentSelectedDate;
+
+        function loadDateData(dateStr) {
+            currentSelectedDate = dateStr;
+            const data = dailyPerformance[dateStr] || { hours: 0, prod: '100%', mood: 'Locked In', thoughts: '' };
+            document.getElementById('perf-hours').value = data.hours || 0;
+            document.getElementById('perf-prod').value = data.prod || '100%';
+            document.getElementById('perf-thoughts').value = data.thoughts || '';
+            setMood(data.mood || 'Locked In', false);
+            updateTaskStat();
+        }
+
+        function adjustPerfHours(delta) {
+            const el = document.getElementById('perf-hours');
+            let val = Math.max(0, parseFloat(el.value || 0) + delta);
+            val = Math.round(val * 10) / 10;
+            el.value = val;
+            saveDateData();
+        }
+
+        let selectedMood = 'Locked In';
+        function setMood(m, shouldSave = true) {
+            selectedMood = m;
+            ['Locked-In', 'Flow', 'Calm', 'Fatigued'].forEach(id => {
+                const b = document.getElementById('mood-' + id);
+                if (b) {
+                    b.style.backgroundColor = 'transparent';
+                    b.classList.add('opacity-60');
+                }
+            });
+            const activeB = document.getElementById('mood-' + m.replace(' ', '-'));
+            if (activeB) {
+                activeB.style.backgroundColor = 'var(--accent-soft)';
+                activeB.classList.remove('opacity-60');
+            }
+            if (shouldSave) saveDateData();
+        }
+
+        function saveDateData() {
+            dailyPerformance[currentSelectedDate] = {
+                hours: parseFloat(document.getElementById('perf-hours').value) || 0,
+                prod: document.getElementById('perf-prod').value,
+                mood: selectedMood,
+                thoughts: document.getElementById('perf-thoughts').value
+            };
+            localStorage.setItem('lockin_daily_perf', JSON.stringify(dailyPerformance));
+            renderWeeklyBarGraph();
+        }
+
+        function logCompletedSession(mins) {
+            const today = new Date().toISOString().split('T')[0];
+            const existing = dailyPerformance[today] || { hours: 0, prod: '100%', mood: 'Locked In', thoughts: '' };
+            existing.hours = parseFloat((existing.hours + (mins / 60)).toFixed(1));
+            dailyPerformance[today] = existing;
+            localStorage.setItem('lockin_daily_perf', JSON.stringify(dailyPerformance));
+            if (currentSelectedDate === today) loadDateData(today);
+            renderWeeklyBarGraph();
+        }
+
+        // Weekly Bar Graph
+        function renderWeeklyBarGraph() {
+            const now = new Date();
+            const currentDay = now.getDay();
+            const distanceToMon = currentDay === 0 ? 6 : currentDay - 1;
+            const monday = new Date(now);
+            monday.setDate(now.getDate() - distanceToMon);
+
+            const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+            let totalWeeklyHours = 0;
+            const maxHours = 8.0;
+
+            const weekHours = days.map((_, index) => {
+                const d = new Date(monday);
+                d.setDate(monday.getDate() + index);
+                const key = d.toISOString().split('T')[0];
+                const hrs = dailyPerformance[key]?.hours || (dailyPerformance[key] === undefined ? [5.5, 6.0, 4.5, 7.0, 5.0, 6.5, 3.0][index] : 0);
+                totalWeeklyHours += hrs;
+                return { hrs, key };
+            });
+
+            document.getElementById('weekly-total-label').innerText = `${totalWeeklyHours.toFixed(1)} hrs total`;
+
+            days.forEach((day, i) => {
+                const { hrs } = weekHours[i];
+                const pct = Math.min(100, Math.max(10, (hrs / maxHours) * 100));
+                const bar = document.getElementById('bar-' + day);
+                const lbl = document.getElementById('lbl-' + day);
+                if (bar) bar.style.height = pct + '%';
+                if (lbl) lbl.innerText = hrs > 0 ? `${hrs}h` : '';
+            });
+        }
+
+        // Preferences & Scholar Details
+        function savePreferences() {
+            const prefs = {
+                name: document.getElementById('pref-name').value || 'Julian',
+                goal: document.getElementById('pref-goal').value || 'NEET 2027 / Class 12 Boards',
+                dailyHours: document.getElementById('pref-daily-hours').value || 6,
+                sound: document.getElementById('pref-sound').value || 'enabled'
+            };
+            localStorage.setItem('lockin_preferences', JSON.stringify(prefs));
+            document.getElementById('badge-name').innerText = prefs.name;
+            document.getElementById('badge-goal').innerText = prefs.goal;
+        }
+
+        function loadPreferences() {
+            const prefs = JSON.parse(localStorage.getItem('lockin_preferences')) || {
+                name: 'Julian',
+                goal: 'NEET 2027 / Class 12 Boards',
+                dailyHours: 6,
+                sound: 'enabled'
+            };
+            document.getElementById('pref-name').value = prefs.name;
+            document.getElementById('pref-goal').value = prefs.goal;
+            document.getElementById('pref-daily-hours').value = prefs.dailyHours;
+            document.getElementById('pref-sound').value = prefs.sound;
+            document.getElementById('badge-name').innerText = prefs.name;
+            document.getElementById('badge-goal').innerText = prefs.goal;
+        }
+
+        // Initialize Everything
+        renderHabits();
+        renderTasks();
+        loadPreferences();
+        loadDateData(currentSelectedDate);
+        renderWeeklyBarGraph();
+        updateTimerDisplay();
+    </script>
+</body>
+</html>

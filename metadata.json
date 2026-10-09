@@ -1,0 +1,6 @@
+{
+  "name": "Lock In",
+  "description": "Deep focus sanctuary and study timer with habit tracking, academic task checklists, and daily performance journaling.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
