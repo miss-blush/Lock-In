@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCEABB"/>
+      <stop offset="50%" stop-color="#F8B500"/>
+      <stop offset="100%" stop-color="#C8955A"/>
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#231A12"/>
+      <stop offset="100%" stop-color="#0A0908"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bgGlow)"/>
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-opacity="0.3"/>
+  <!-- Book Body -->
+  <rect x="136" y="116" width="240" height="280" rx="18" fill="#14100E" stroke="url(#goldGrad)" stroke-width="8"/>
+  <path d="M156 136 L356 136 M156 376 L356 376" stroke="url(#goldGrad)" stroke-width="3" stroke-opacity="0.6"/>
+  <!-- Spine Ribs -->
+  <line x1="166" y1="116" x2="166" y2="396" stroke="url(#goldGrad)" stroke-width="6"/>
+  <!-- Central Owl Crest -->
+  <g transform="translate(256, 256)" stroke="url(#goldGrad)" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Owl Head -->
+    <path d="M-40 -40 L-20 -60 L0 -45 L20 -60 L40 -40 C46 -15 35 15 0 25 C-35 15 -46 -15 -40 -40 Z" fill="#1E1712"/>
+    <!-- Eyes -->
+    <circle cx="-18" cy="-28" r="10" fill="url(#goldGrad)"/>
+    <circle cx="18" cy="-28" r="10" fill="url(#goldGrad)"/>
+    <circle cx="-18" cy="-28" r="4" fill="#0A0908"/>
+    <circle cx="18" cy="-28" r="4" fill="#0A0908"/>
+    <!-- Beak -->
+    <polygon points="0,-20 -6,-10 6,-10" fill="url(#goldGrad)"/>
+    <!-- Laurel Wreath -->
+    <path d="M-60 10 C-65 -20 -50 -50 -30 -65"/>
+    <path d="M60 10 C65 -20 50 -50 30 -65"/>
+    <!-- Focus Star -->
+    <polygon points="0,-75 3,-68 10,-65 3,-62 0,-55 -3,-62 -10,-65 -3,-68" fill="url(#goldGrad)"/>
+  </g>
+</svg>

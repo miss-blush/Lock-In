@@ -1,0 +1,31 @@
+{
+  "name": "Lock In - Study Sanctuary",
+  "short_name": "Lock In",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0908",
+  "theme_color": "#0A0908",
+  "description": "Deep Focus Sanctuary and study timer with habit tracking, academic task checklists, and daily performance journaling.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -12,6 +12,14 @@
     <meta name="application-name" content="Lock In">
     <meta name="theme-color" content="#0A0908">
 
+    <!-- Web App Manifest & PWA Icons for Chrome Standalone Installability -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -460,9 +468,23 @@
         }
 
         // Theme Switcher & Background Sync
+        const themeBackgrounds = {
+            'dark-academia': 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1600&auto=format&fit=crop',
+            'rainy-library': 'https://images.unsplash.com/photo-1519692933481-e162a57d6721?q=80&w=1600&auto=format&fit=crop',
+            'golden-sunflower': 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?q=80&w=1600&auto=format&fit=crop',
+            'enchanted-forest': 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop',
+            'twilight-streetlamp': 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=1600&auto=format&fit=crop'
+        };
+
         function applyTheme(themeKey) {
             document.documentElement.setAttribute('data-theme', themeKey);
+            document.body.setAttribute('data-theme', themeKey);
             localStorage.setItem('lockin_theme', themeKey);
+            
+            if (localStorage.getItem('lockin_wallpaper') !== 'false') {
+                document.body.style.backgroundImage = `url('${themeBackgrounds[themeKey]}')`;
+            }
+            
             const activeBtn = document.querySelector('nav button:not(.opacity-70)');
             if (activeBtn) {
                 activeBtn.style.backgroundColor = 'var(--accent)';
@@ -476,10 +498,23 @@
         function toggleWallpaper(enable) {
             document.body.classList.toggle('no-wallpaper', !enable);
             localStorage.setItem('lockin_wallpaper', enable ? 'true' : 'false');
+            if (enable) {
+                const current = localStorage.getItem('lockin_theme') || 'dark-academia';
+                document.body.style.backgroundImage = `url('${themeBackgrounds[current]}')`;
+            } else {
+                document.body.style.backgroundImage = 'none';
+            }
         }
         const savedWallpaper = localStorage.getItem('lockin_wallpaper') !== 'false';
         document.getElementById('pref-wallpaper').checked = savedWallpaper;
         toggleWallpaper(savedWallpaper);
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch(() => {});
+            });
+        }
 
         // Web Audio Synthesizer (Pure 528Hz Focus Chime)
         function playChimeSound() {
