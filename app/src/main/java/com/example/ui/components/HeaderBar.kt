@@ -78,17 +78,17 @@ fun HeaderBar(
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_launcher_fg),
-                        contentDescription = "Lock In Crest",
+                        contentDescription = "LockIn Logo",
                         modifier = Modifier.size(28.dp)
                     )
                 }
 
                 Column {
                     Text(
-                        text = "Lock In",
+                        text = "LockIn : Focus and Planner",
                         color = theme.textColor,
                         fontWeight = FontWeight.Bold,
-                        fontSize = 17.sp,
+                        fontSize = 15.sp,
                         letterSpacing = 0.5.sp
                     )
                     Text(

@@ -1,6 +1,6 @@
 {
-  "name": "Lock In - Study Sanctuary",
-  "short_name": "Lock In",
+  "name": "LockIn : Focus and Planner",
+  "short_name": "LockIn",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

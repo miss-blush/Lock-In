@@ -22,6 +22,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "Lock In"
+rootProject.name = "LockIn - Focus and Planner"
 
 include(":app")
